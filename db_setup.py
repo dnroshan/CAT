@@ -15,12 +15,12 @@ with connection as cursor:
     query = '''CREATE TABLE IF NOT EXISTS users
                (
                     username VARCHAR(50),
-                    salt     CHAR(128) NOT NULL,
-                    hashed   CHAR(128) NOT NULL,
-                    type     CHAR      NOT NULL,
+                    salt     CHAR(128)      NOT NULL,
+                    hashed   CHAR(128)      NOT NULL,
+                    type     CHAR           NOT NULL,
 
                     PRIMARY KEY(username)
-                );'''
+               );'''
 
     cursor.execute(query)
 
@@ -51,6 +51,39 @@ with connection as cursor:
 
                    PRIMARY KEY(username),
                    FOREIGN KEY(username) REFERENCES users(username)
+               );'''
+    cursor.execute(query)
+
+    query = '''CREATE TABLE IF NOT EXISTS tests
+               (
+                   test_id          INT             AUTO_INCREMENT,
+                   title            VARCHAR(50)     NOT NULL,
+                   description      VARCHAR(500)     NOT NULL,
+                   scores           VARCHAR(50)     NOT NULL,
+                   threshold        INT             NOT NULL,
+                   examiner         VARCHAR(50)     NOT NULL,
+                   date             DATE            NOT NULL,
+                   standard         VARCHAR(50)     NOT NULL,
+                   subject          VARCHAR(50)     NOT NULL,
+                   question_bank    VARCHAR(50)     NOT NULL,
+
+                   PRIMARY KEY(test_id),
+                   FOREIGN KEY(examiner) REFERENCES examiners(username)
+               );'''
+    cursor.execute(query)
+
+    query = '''CREATE TABLE IF NOT EXISTS results
+               (
+                   result_id    INT         AUTO_INCREMENT,
+                   test         INT         NOT NULL,
+                   candidate    VARCHAR(50) NOT NULL,
+                   date         DATE        NOT NULL,
+                   score        INT         NOT NULL,
+                   passed       BOOL        NOT NULL,
+
+                   PRIMARY KEY(result_id),
+                   FOREIGN KEY(test)      REFERENCES tests(test_id),
+                   FOREIGN KEY(candidate) REFERENCES candidates(username)
                );'''
     cursor.execute(query)
 
