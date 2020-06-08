@@ -2,15 +2,14 @@
 from flask_wtf import Form
 from wtforms import TextField
 from wtforms import PasswordField
-from wtforms.fields.html5 import DateField
-from wtforms.fields import SelectField
+from wtforms.fields import SelectMultipleField
 from wtforms import SubmitField
-from wtforms.fields.html5 import EmailField
 from wtforms import validators
+from wtforms import widgets
 
 import constants
 
-class FormCandidateReg(Form):
+class FormExaminerReg(Form):
     username = TextField(
         'username',
         validators=[
@@ -49,24 +48,9 @@ class FormCandidateReg(Form):
         ]
     )
 
-    dob = DateField(
-        'dob',
-        validators=[
-            validators.DataRequired()
-        ]
-    )
-
-    gender = SelectField(
-        'gender',
-        choices=[('Male', 'Male'), ('Female', 'Female')],
-        validators=[
-            validators.DataRequired()
-        ]
-    )
-
-    standard = SelectField(
-        'standard',
-        choices=list(zip(constants.STANDARDS, constants.STANDARDS)),
+    subject = SelectMultipleField(
+        'subject',
+        choices=list(zip(constants.SUBJECTS, constants.SUBJECTS)),
         validators=[
             validators.DataRequired()
         ]
@@ -79,24 +63,10 @@ class FormCandidateReg(Form):
         ]
     )
 
-    email = EmailField(
-        'email',
-        validators=[
-            validators.DataRequired(),
-            validators.Email()
-        ]
-    )
-
-    phone = TextField(
-        'phone',
-        validators=[
-            validators.DataRequired()
-        ]
-    )
-    
     submit = SubmitField(
         'submit',
         validators=[
             validators.DataRequired()
         ]
     )
+

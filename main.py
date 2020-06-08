@@ -21,6 +21,7 @@ from table_tests import TableTests
 
 from form_login import FormLogin
 from form_candidate_reg import FormCandidateReg
+from form_examiner_reg import FormExaminerReg
 
 from user import User
 from crypto import Crypto
@@ -89,7 +90,8 @@ def candidate_registration():
 
 @app.route('/examiner-registration')
 def examiner_registration():
-    return render_template('examiner_registration.html')
+    form_reg = FormExaminerReg()
+    return render_template('examiner_registration.html', form_reg=form_reg)
 
 @app.route('/candiadte-registration/add-candidate', methods=['POST'])
 def add_candidate():
@@ -119,24 +121,27 @@ def add_candidate():
 
 @app.route('/examiner-registration/add-examiner', methods=['POST'])
 def add_examiner():
-    form = dict(request.form)
+    form = FormExaminerReg(request.form)
 
-    if table_users.get(form['username']):
-        return redirect(url_for('examiner_registeration'))
-    if form['password'] != form['passwordre']:
-        return redirect(url_for('examiner_registeration'))
+    if form.validate():
+        if table_users.get(form.username.data):
+            form.username.errors.append('This username is not available.')
+            return render_template('examiner_registration.html', form_reg=form)
 
-    add_user(form['username'], form['password'], constants.UserType.Examiner)
+        add_user(form.username.data, form.password.data, constants.UserType.Examiner)
 
-    examiner_data = {
-        'username'  : form['username'],
-        'first_name': form['first_name'],
-        'last_name' : form['last_name'],
-        'subject'   : form['subject'],
-        'school'    : form['school'],
-    }
-    table_examiners.add(examiner_data)
-    return redirect(url_for('home'))
+        examiner_data = {
+            'username'  : form.username.data,
+            'first_name': form.first_name.data,
+            'last_name' : form.last_name.data,
+            'subject'   : ','.join(form.subject.data),
+            'school'    : form.school.data,
+        }
+        table_examiners.add(examiner_data)
+        return redirect(url_for('home'))
+
+    return render_template('examiner_registration.html', form_reg=form)
+    
 
 @app.route('/admin')
 @login_required
