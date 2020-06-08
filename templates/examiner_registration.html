@@ -24,29 +24,86 @@
         Duis vitae consectetur sem, in euismod massa. Curabitur vitae lorem iaculis, placerat augue in, bibendum sem. Aliquam vestibulum lorem eu magna semper tristique.
     </p>
     <br><br>
-    <form action="/examiner-registration/add-examiner" method="POST">
+    <form action="{{ url_for('add_examiner') }}" method="POST">
+        {{ form_reg.csrf_token }}
         <label for="username">Username</label><br>
-        <input type="text" name="username" id="username" required><br>
+        {{ form_reg.username(id="username") }}
+        {% if form_reg.username.errors %}
+        <ul class="errors">
+            {% for error in form_reg.username.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <br>
+
         <label for="password">Password</label><br>
-        <input type="password" name="password" id="password" required><br>
+        {{ form_reg.password(id="password") }}
+        {% if form_reg.password.errors %}
+        <ul class="errors">
+            {% for error in form_reg.password.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <br>
+
         <label for="passwordre">Retype Password</label><br>
-        <input type="password" name="passwordre" id="passwordre"><br><br>
+        {{ form_reg.passwordre(id="passwordre") }}
+        {% if form_reg.passwordre.errors %}
+        <ul class="errors">
+            {% for error in form_reg.passwordre.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <br><br>
+
         <label for="first_name">First Name</label><br>
-        <input type="text" name="first_name" id="first_name" required><br>
+        {{ form_reg.first_name(id="first_name") }}
+        {% if form_reg.first_name.errors %}
+        <ul class="errors">
+            {% for error in form_reg.first_name.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <br>
+
         <label for="last_name">Last Name</label ><br>
-        <input type="text" name="last_name" id="last_name" required><br><br>
+        {{ form_reg.last_name(id="last_name") }}
+        {% if form_reg.last_name.errors %}
+        <ul class="errors">
+            {% for error in form_reg.last_name.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <br>
+
         <label for="subject">Subject</label><br>
-        <select name="subject" id="Subject">
-            <option value="Mathematics">Mathematics</option>
-            <option value="Physics">Physics</option>
-            <option value="Chemistry">Chemistry</option>
-            <option value="Zoology">Zoology</option>
-            <option value="Botony">Botony</option>
-            <option value="Computer Science">Computer Science</option>
-        </select><br>
+        {{ form_reg.subject(id="subject", multiple=True) }}
+        {% if form_reg.subject.errors %}
+        <ul class="errors">
+            {% for error in form_reg.subject.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <br>
+
         <label for="school">School</label><br>
-        <input type="text" name="school" id="school"><br><br>
-        <input type="submit" value="Register" class="button-green">
+        {{ form_reg.school(id="school")}}
+        {% if form_reg.school.errors %}
+        <ul class="errors">
+            {% for error in form_reg.school.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <br><br>
+
+        {{ form_reg.submit(value="Register", class="button-green") }}
     </form>
 </div>
 {% endblock %}
