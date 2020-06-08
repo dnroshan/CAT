@@ -10,7 +10,7 @@ class TableUsers():
                                passwd=config.PASSWORD,
                                db = config.DATABASE)
 
-    def get_user(self, username):
+    def get(self, username):
         with self.__connect() as cursor:
             query = 'SELECT * FROM users WHERE username = %s;'
             cursor.execute(query, username)
@@ -27,7 +27,7 @@ class TableUsers():
                     'type'     : int(data[3])
             }
 
-    def add_user(self, new_user):
+    def add(self, new_user):
 
         connection = self.__connect()
         with connection as cursor:
