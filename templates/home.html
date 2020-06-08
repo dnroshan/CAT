@@ -1,28 +1,84 @@
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>CAT</title>
-    </head>
-    <body>
-        {% if error %}
-            <script>
-                alert('Invalid user!');
-            </script>
-        {% endif %}
-        <h1>CAT</h1>
-        <div>
-            <form action="/login" method="POST">
-                <label for="username">Username</label><br>
-                <input type="txt" id="username" name="username"><br>
-                <label for="password">Password</label><br>
-                <input type="password" id="password" name="password"><br>
-                <input type="submit" value="Login"><br>
-            </form>
-        </div>
-        <div>
-            <h3>Register here</h3>
-            <a href="/candiadte_signup"><button>Register</button></a>
-        </div>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block head %}
+<title>CAAT</title>
+{% endblock %}
+
+{% block navlinks %}
+<a href="#footer" class="navlink">Contact</a>
+<a href="#col-4" class="navlink">About</a>
+<a href="#help" class="navlink">Help</a>
+<a href="#col-1" class="navlink">Home</a>
+<a href="" class="navlink">Registration</a>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div id="col-1">
+        <h1>
+            <span style="font-size: 70px;">Do you</span><br>
+            <span style="font-size: 50px;">want to take</span><br>
+            <span style="text-decoration:double; color:green;">computer aided adaptive tests?</span>
+        </h1>
+        <a href="{{ url_for('candidate_registration') }}"><button class="button-green">Register</button></a><br>
+        <br>
+        <h2>Registration for <span style="color: teal;">examiners</span></h2>
+        <a href="{{ url_for('examiner_registration') }}"><button class="button-blue">Register</button></a>
+    </div>
+    <div id="col-2">
+        <form action="/login" method="POST">
+            <label for="username" class="label">Username</label><br>
+            <input type="text" id="username" name="username" class="text-box"><br>
+            <label for="password" class="label">Password</label><br>
+            <input type="password" id="password" name="password" class="text-box"><br>
+            <input type="submit" value="Login" class="button-green"><br>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <i id="help"></i>
+    <div id="col-3">
+        <h2><span style="color: green;">What is CAAT?</span></h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et dolor at augue consectetur fermentum vitae sit amet lorem.
+            Etiam sit amet risus ac dui auctor consequat. Phasellus maximus consequat mollis. Nunc ut tortor odio. Nunc sed nulla lorem. 
+            Aenean facilisis porttitor lorem ut interdum. Integer laoreet felis laoreet, luctus nisl non, porttitor diam. Ut ut lobortis turpis. 
+            Duis vitae consectetur sem, in euismod massa. Curabitur vitae lorem iaculis, placerat augue in, bibendum sem. Aliquam vestibulum lorem eu magna semper tristique.
+        </p>
+        <p>
+            Aliquam aliquet urna a ante finibus lacinia. Integer placerat egestas est, non lacinia mauris vehicula in. Praesent egestas, mi sed scelerisque semper, dolor dolor venenatis elit, hendrerit posuere augue justo euismod orci. 
+            Ut commodo feugiat mollis. Vivamus at urna in justo blandit dapibus at eget libero. In blandit, erat at consequat sagittis, ante lacus lacinia nisi, id congue lorem tellus non enim. Phasellus non diam a magna accumsan feugiat eu id elit. 
+            Donec blandit purus eget est gravida viverra sed eu nibh. Etiam ultrices felis eros, maximus tincidunt arcu tempor in. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae tortor non nunc fringilla malesuada sed vitae nisl. 
+        </p>
+        <h2><span style="color: green;">How to</span></h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et dolor at augue consectetur fermentum vitae sit amet lorem.
+            Etiam sit amet risus ac dui auctor consequat. Phasellus maximus consequat mollis. Nunc ut tortor odio. Nunc sed nulla lorem. 
+            Aenean facilisis porttitor lorem ut interdum. Integer laoreet felis laoreet, luctus nisl non, porttitor diam. Ut ut lobortis turpis. 
+            Duis vitae consectetur sem, in euismod massa. Curabitur vitae lorem iaculis, placerat augue in, bibendum sem. Aliquam vestibulum lorem eu magna semper tristique.
+        </p>
+        <p>
+            Aliquam aliquet urna a ante finibus lacinia. Integer placerat egestas est, non lacinia mauris vehicula in. Praesent egestas, mi sed scelerisque semper, dolor dolor venenatis elit, hendrerit posuere augue justo euismod orci. 
+            Ut commodo feugiat mollis. Vivamus at urna in justo blandit dapibus at eget libero. In blandit, erat at consequat sagittis, ante lacus lacinia nisi, id congue lorem tellus non enim. Phasellus non diam a magna accumsan feugiat eu id elit. 
+            Donec blandit purus eget est gravida viverra sed eu nibh. Etiam ultrices felis eros, maximus tincidunt arcu tempor in. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae tortor non nunc fringilla malesuada sed vitae nisl. 
+        </p>
+    </div>
+</div>
+<div class="row" style="padding-top: 0px;">
+    <div id="col-4">
+        <h2><span style="color: green;">About Us</span></h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et dolor at augue consectetur fermentum vitae sit amet lorem.
+            Etiam sit amet risus ac dui auctor consequat. Phasellus maximus consequat mollis. Nunc ut tortor odio. Nunc sed nulla lorem. 
+            Aenean facilisis porttitor lorem ut interdum. Integer laoreet felis laoreet, luctus nisl non, porttitor diam. Ut ut lobortis turpis. 
+            Duis vitae consectetur sem, in euismod massa. Curabitur vitae lorem iaculis, placerat augue in, bibendum sem. Aliquam vestibulum lorem eu magna semper tristique.
+        </p>
+        <p>
+            Aliquam aliquet urna a ante finibus lacinia. Integer placerat egestas est, non lacinia mauris vehicula in. Praesent egestas, mi sed scelerisque semper, dolor dolor venenatis elit, hendrerit posuere augue justo euismod orci. 
+            Ut commodo feugiat mollis. Vivamus at urna in justo blandit dapibus at eget libero. In blandit, erat at consequat sagittis, ante lacus lacinia nisi, id congue lorem tellus non enim. Phasellus non diam a magna accumsan feugiat eu id elit. 
+            Donec blandit purus eget est gravida viverra sed eu nibh. Etiam ultrices felis eros, maximus tincidunt arcu tempor in. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae tortor non nunc fringilla malesuada sed vitae nisl. 
+        </p>
+    </div>
+</div>
+{% endblock %}
