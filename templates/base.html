@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="../static/css/base.css">
+        {% block head %}
+        
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            <h1 class="title">CAAT</h1>
+            <div id="home-nav">
+                {% block navlinks %}
+                
+                {% endblock %}
+            </div>
+        </header>
+        <br><br><br>
+        {% block content %}
+
+        {% endblock %}
+        <footer id="footer">
+            <h4>Contact</h6>
+            <ul>
+                <li>Donec quis diam a ante porta gravida.</li>
+                <li>Morbi interdum neque id eleifend dictum.</li>
+                <li>Duis pharetra quam in hendrerit ullamcorper.</li>
+                <li>Fusce at purus in ligula condimentum vehicula.</li>
+                <li>Morbi interdum neque id eleifend dictum.</li>
+            </ul> 
+            <br>
+            &copy; Dilnavas Roshan.   
+        </footer>
+    </body>
+</html>
