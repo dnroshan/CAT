@@ -1,0 +1,127 @@
+
+{% extends "base.html" %}
+
+{% block head %}
+<title>CAAT|{{username}}</title>
+<link rel="stylesheet" type="text/css" href="../static/css/examiner.css">
+<link rel="stylesheet" type="text/css" href="../static/css/table.css">
+<script src="../static/js/tab_view.js"></script>
+{% endblock %}
+
+{% block navlinks %}
+<a href="/logout"><button class="button-green-small">Logout</button></a>
+<div class="nav-label">
+    {{username}} |
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div id="col-5">
+        <br>
+        <button id="add-test" onclick="tab_control(event, 'container-add-test')" id="default" class="tab-link">Add Test</button>
+        <button onclick="tab_control(event, 'container-tests')" id="tests" class="tab-link">Tests</button>
+        <button onclick="tab_control(event, 'container-results')" id="results" class="tab-link">Results</button>
+        <button onclick="tab_control(event, 'container-profile')" id="profile" class="tab-link">Profile</button>
+        <br><br><br>
+    </div>
+    <div id="col-6">
+        <div id="container-add-test" class="tab-container">
+            <h2><span style="color: green;">Add a Test</span></h2>
+            <p class="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et dolor at augue consectetur fermentum vitae sit amet lorem.
+                Etiam sit amet risus ac dui auctor consequat. Phasellus maximus consequat mollis. Nunc ut tortor odio. Nunc sed nulla lorem. 
+                Aenean facilisis porttitor lorem ut interdum. Integer laoreet felis laoreet, luctus nisl non, porttitor diam. Ut ut lobortis turpis. 
+                Duis vitae consectetur sem, in euismod massa. Curabitur vitae lorem iaculis, placerat augue in, bibendum sem. Aliquam vestibulum lorem eu magna semper tristique.
+            </p><br><br>
+            <form action="/examiner/add-test" method="POST" enctype="multipart/form-data">
+                <label for="title">Title</label><br>
+                <input type="text" name="title" id="title" required><br>
+                <label for="decription">Description</label><br>
+                <textarea name="description" id="description" required></textarea><br>
+                <label for="date">Date</label><br>
+                <input type="date" name="date" id="date" required><br><br>
+                <label for="subject">Subject</label><br>
+                <select name="subject" id="subject">
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Zoology">Zoology</option>
+                    <option value="Botony">Botony</option>
+                    <option value="Computer Science">Computer Science</option>
+                </select><br>
+                <label for="standard">Standard</label><br>
+                <select name="standard" id="standard" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select><br>
+                <br>    
+                <label for="group_scores">Scores</label><br>
+                <div id="group_scores">
+                    <label for="score_easy">Easy </label>
+                    <input type="text" name="score_easy" id="score_easy" required>
+                    <label for="score_medium">Medium </label>
+                    <input type="text" name="score_medium" id="score_medium" required>
+                    <label for="score_Hard">Hard </label>
+                    <input type="text" name="score_hard" id="score_hard" required>
+                    <label for="score_threshold">Threshold </label>
+                    <input type="text" name="score_threshold" id="score_threshold" required>
+                </div>
+                <br><br>
+                <label for="question_bank">Question bank</label><br><br>
+                <input type="file" name="question_bank" id="question_bank">
+                <br><br><br>
+                <input type="submit" value="Add test" class="button-green">
+                <br><br>
+            </form>
+        </div>
+        <div id="container-tests" class="tab-container">
+            <h2><span style="color: green;">Tests</span></h2>
+            <p class="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et dolor at augue consectetur fermentum vitae sit amet lorem.
+                Etiam sit amet risus ac dui auctor consequat. Phasellus maximus consequat mollis. Nunc ut tortor odio. Nunc sed nulla lorem. 
+                Aenean facilisis porttitor lorem ut interdum. Integer laoreet felis laoreet, luctus nisl non, porttitor diam. Ut ut lobortis turpis. 
+                Duis vitae consectetur sem, in euismod massa. Curabitur vitae lorem iaculis, placerat augue in, bibendum sem. Aliquam vestibulum lorem eu magna semper tristique.
+            </p><br><br>
+            <table id="table-tests" class="table-green">
+                <tr>
+                    <th rowspan="2">Title</th>
+                    <th rowspan="2">Description</th>
+                    <th rowspan="2">Date</th>
+                    <th rowspan="2">Subject</th>
+                    <th rowspan="2">Standard</th>
+                    <th colspan="4">Scores</th>
+                </tr>
+                <tr>
+                    <th>Easy</th>
+                    <th>Medium</th>
+                    <th>Hard</th>
+                    <th>Threshold</th>
+                </tr>
+            </table>
+            <br><br>
+        </div>
+        <div id="container-results" class="tab-container">
+            <h3>Results</h3>
+        </div>
+        <div id="container-profile" class="tab-container">
+            <h3>Profile</h3>
+        </div>
+    </div>
+</div>
+<script src="../static/js/utils.js"></script>
+<script src = "../static/js/examiner.js"></script>
+<script>
+    console.log(get_parm('tab'));
+    document.getElementById(get_parm('tab')).click();
+</script>
+
+{% endblock %}
