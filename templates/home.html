@@ -30,7 +30,7 @@
         <form action="/login" method="POST">
             {{ form_login.csrf_token }}
             <label for="username" class="label">Username</label><br>
-            {{ form_login.username(class="text-box") }}<br>
+            {{ form_login.username(id="username", class="text-box") }}<br>
             {% if form_login.username.errors %}
                 <ul class="errors">
                     {% for error in form_login.username.errors %}
@@ -39,7 +39,7 @@
                 </ul>
             {% endif %}
             <label for="password" class="label">Password</label><br>
-            {{ form_login.password(class="text-box") }}<br>
+            {{ form_login.password(id="password", class="text-box") }}<br>
             {% if form_login.password.errors %}
             <ul class="errors">
                 {% for error in form_login.password.errors %}
