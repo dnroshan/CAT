@@ -19,3 +19,8 @@ SUBJECTS = [
     'Geography'
 ]
 
+def choices():
+    choice_list = list(zip(SUBJECTS, SUBJECTS))
+    choice_list.insert(0, ('All', 'All'))
+    return choice_list
+

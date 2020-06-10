@@ -12,5 +12,4 @@ function tab_control(event, option){
 
     document.getElementById(option).style.display = 'block';
     event.currentTarget.className += ' tab-link-active';
-    change_parm('tab', event.currentTarget.id);
 }

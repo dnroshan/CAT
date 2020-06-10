@@ -37,8 +37,23 @@ function getCookie(cname) {
     }
   } 
 
-  function add_parm(parm, value){
-    history.pushState(null, null, window.location.href+'?'+parm+'='+value);
+function replaceUrlParam(url, paramName, paramValue)
+{
+    if (paramValue == null) {
+        paramValue = '';
+    }
+    var pattern = new RegExp('\\b('+paramName+'=).*?(&|#|$)');
+    if (url.search(pattern)>=0) {
+        return url.replace(pattern,'$1' + paramValue + '$2');
+    }
+    url = url.replace(/[?#]$/,'');
+    return url + (url.indexOf('?')>0 ? '&' : '?') + paramName + '=' + paramValue;
+}
+
+function add_parm(parm, value){
+    var url = window.location.href;
+    var new_url = replaceUrlParam(url, parm, value);
+    history.pushState(null, null, new_url);
   }
 
   function get_parm(parm){
