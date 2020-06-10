@@ -21,7 +21,6 @@ with connection as cursor:
 
                     PRIMARY KEY(username)
                );'''
-
     cursor.execute(query)
 
     query = '''CREATE TABLE IF NOT EXISTS candidates
@@ -85,6 +84,23 @@ with connection as cursor:
                    PRIMARY KEY(result_id),
                    FOREIGN KEY(test)      REFERENCES tests(test_id),
                    FOREIGN KEY(candidate) REFERENCES candidates(username)
+               );'''
+    cursor.execute(query)
+
+    query = '''CREATE TABLE IF NOT EXISTS question_bank
+               (
+                   question_id  BIGINT UNSIGNED     AUTO_INCREMENT,
+                   test         INT                 NOT NULL,
+                   question     VARCHAR(200)        NOT NULL,
+                   option_a     VARCHAR(50)         NOT NULL,
+                   option_b     VARCHAR(50)         NOT NULL,
+                   option_c     VARCHAR(50)         NOT NULL,
+                   option_d     VARCHAR(50)         NOT NULL,
+                   answer       CHAR                NOT NULL,
+                   difficulty   CHAR                NOT NULL,
+
+                   PRIMARY KEY(question_id),
+                   FOREIGN KEY(test) REFERENCES tests(test_id)
                );'''
     cursor.execute(query)
 
