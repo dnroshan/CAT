@@ -1,17 +1,85 @@
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Account</title>
-    </head>
-    <body>
-        <nav>
-            <a href="\tests"><button>Tests</button></a>
-            <a href="\marksheet"><button>Marksheet</button></a>
-            <a href="\profile"><button>Profile</button></a>
-        </nav>
-        <div>
-            
+{% extends "base.html" %}
+
+{% block head %}
+<title>CAAT|{{username}}</title>
+<link rel="stylesheet" type="text/css" href="../static/css/table.css">
+<link rel="stylesheet" type="text/css" href="../static/css/candidate.css">
+<script src="../static/js/tab_view.js"></script>
+{% endblock %}
+
+{% block navlinks %}
+<a href="/logout"><button class="button-green-small">Logout</button></a>
+<div class="nav-label">
+    {{username}} |
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div id="col-5">
+        <br>
+        <button onclick="tab_control(event, 'container-tests')" id="tests" class="tab-link">Tests</button>
+        <button onclick="tab_control(event, 'container-results')" id="results" class="tab-link">Results</button>
+        <button onclick="tab_control(event, 'container-profile')" id="profile" class="tab-link">Profile</button>
+        <br><br><br>
+    </div>
+    <div id="col-6">
+        <div id="container-tests" class="tab-container">
+            <h2><span style="color: green;">Tests</span></h2>
+            <p class="description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et dolor at augue consectetur fermentum vitae sit amet lorem.
+                Etiam sit amet risus ac dui auctor consequat. Phasellus maximus consequat mollis. Nunc ut tortor odio. Nunc sed nulla lorem. 
+                Aenean facilisis porttitor lorem ut interdum. Integer laoreet felis laoreet, luctus nisl non, porttitor diam. Ut ut lobortis turpis. 
+                Duis vitae consectetur sem, in euismod massa. Curabitur vitae lorem iaculis, placerat augue in, bibendum sem. Aliquam vestibulum lorem eu magna semper tristique.
+            </p><br><br>
+            <form action="{{ url_for('candidate') }}">
+                {{ form_search_tests.title.label(id="title_label") }}
+                {{ form_search_tests.title(id='title') }}
+                {{ form_search_tests.subject.label }}
+                {{ form_search_tests.subject() }}
+                {{ form_search_tests.date.label }}
+                {{ form_search_tests.date() }}
+                {{ form_search_tests.submit(class='button-green') }}
+            </form>
+            <br>
+            <table class="table-green">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Subject</th>
+                    <th>Date</th>
+                    <th>Examiner</th>
+                </tr>
+                {% if data_tests %}
+                    {% for row in data_tests %}
+                        <tr>
+                            <td><a href="#">{{ row.title }}</a></td>
+                            <td>{{ row.description }}</td>
+                            <td>{{ row.subject }}</td>
+                            <td>{{ row.date }}</td>
+                            <td>{{ row.examiner }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" style="text-align: center;">No results</td>
+                    </tr>
+                {% endif %}
+            </table>
+            <br><br>
         </div>
-    </body>
-</html>
+        <div id="container-results" class="tab-container">
+            <h2><span style="color: green;">Results</span></h2>
+        </div>
+        <div id="container-profile" class="tab-container">
+            <h2><span style="color: green;">Profile</span></h2>
+        </div>
+    </div>
+</div>
+<script src="../static/js/utils.js"></script>
+<script>
+    document.getElementById('tests').click();
+</script>
+
+{% endblock %}
