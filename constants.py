@@ -24,3 +24,8 @@ def choices():
     choice_list.insert(0, ('All', 'All'))
     return choice_list
 
+class Difficulty:
+    Easy = 'E',
+    Medium = 'M',
+    Hard = 'H'
+    
