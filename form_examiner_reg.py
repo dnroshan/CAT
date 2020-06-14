@@ -14,7 +14,7 @@ class FormExaminerReg(FlaskForm):
         'username',
         validators=[
             validators.DataRequired(),
-            validators.Length(min=4, message='Choose a username of at least 4 characters')
+            validators.Length(min=4, max = 50, message='Choose a username of at least 4 characters')
         ]
     )
 
@@ -37,14 +37,16 @@ class FormExaminerReg(FlaskForm):
     first_name = TextField(
         'first_name',
         validators=[
-            validators.DataRequired()
+            validators.DataRequired(),
+            validators.Length(max=50, message='This field can have at most 50 characters')
         ]
     )
 
     last_name = TextField(
         'last_name',
         validators=[
-            validators.DataRequired()
+            validators.DataRequired(),
+            validators.Length(max=50, message='This field can have at most 50 characters')
         ]
     )
 
@@ -52,14 +54,16 @@ class FormExaminerReg(FlaskForm):
         'subject',
         choices=list(zip(constants.SUBJECTS, constants.SUBJECTS)),
         validators=[
-            validators.DataRequired()
+            validators.DataRequired(),
+            validators.Length(max=50, message='This field can have at most 50 characters')
         ]
     )
 
     school = TextField(
         'school',
         validators=[
-            validators.DataRequired()
+            validators.DataRequired(),
+            validators.Length(max=50, message='This field can have at most 50 characters')
         ]
     )
 

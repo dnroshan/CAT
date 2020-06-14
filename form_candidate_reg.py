@@ -15,7 +15,7 @@ class FormCandidateReg(FlaskForm):
         'username',
         validators=[
             validators.DataRequired(),
-            validators.Length(min=4, message='Choose a username of at least 4 characters')
+            validators.Length(min=4, max = 50, message='Choose a username of at least 4 characters')
         ]
     )
 
@@ -38,14 +38,16 @@ class FormCandidateReg(FlaskForm):
     first_name = TextField(
         'first_name',
         validators=[
-            validators.DataRequired()
+            validators.DataRequired(),
+            validators.Length(max=50, message='This field can have at most 50 characters')
         ]
     )
 
     last_name = TextField(
         'last_name',
         validators=[
-            validators.DataRequired()
+            validators.DataRequired(),
+            validators.Length(max=50, message='This field can have at most 50 characters')
         ]
     )
 
@@ -61,6 +63,7 @@ class FormCandidateReg(FlaskForm):
         choices=[('Male', 'Male'), ('Female', 'Female')],
         validators=[
             validators.DataRequired()
+            validators.Length(max=8, message='This field can have at most 8 characters')
         ]
     )
 
@@ -75,7 +78,8 @@ class FormCandidateReg(FlaskForm):
     school = TextField(
         'school',
         validators=[
-            validators.DataRequired()
+            validators.DataRequired(),
+            validators.Length(max=50, message='This field can have at most 50 characters')
         ]
     )
 
@@ -83,14 +87,16 @@ class FormCandidateReg(FlaskForm):
         'email',
         validators=[
             validators.DataRequired(),
-            validators.Email()
+            validators.Email(),
+            validators.Length(max=50, message='This field can have at most 50 characters')
         ]
     )
 
     phone = TextField(
         'phone',
         validators=[
-            validators.DataRequired()
+            validators.DataRequired(),
+            validators.Length(max=50, message='This field can have at most 20 characters')
         ]
     )
     
